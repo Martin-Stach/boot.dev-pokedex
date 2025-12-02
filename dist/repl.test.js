@@ -26,3 +26,4 @@ describe.each([
         }
     });
 });
+describe.each([]);
