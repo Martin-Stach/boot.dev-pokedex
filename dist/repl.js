@@ -2,7 +2,7 @@ import { getCommands } from "./commands.js";
 export function startREPL(state) {
     console.log("Starting REPL");
     state.rl.prompt();
-    state.rl.on("line", (input) => {
+    state.rl.on("line", async (input) => {
         const words = cleanInput(input);
         if (words.length === 0) {
             state.rl.prompt();
@@ -15,7 +15,12 @@ export function startREPL(state) {
             console.log("Unknown command");
         }
         else {
-            cmd.callback(state);
+            try {
+                await cmd.callback(state);
+            }
+            catch (error) {
+                console.log("Error running command:", error);
+            }
         }
         state.rl.prompt();
     });

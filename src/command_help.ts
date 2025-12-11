@@ -1,6 +1,6 @@
 import type { State } from "./state";
 
-export function commandHelp(state: State) {
+export async function commandHelp(state: State) {
     console.log("Welcome to the Pokedex!");
     console.log("Usage:\n");
     for (const cmd of Object.values(state.commands)) {

@@ -1,4 +1,4 @@
-export function commandHelp(state) {
+export async function commandHelp(state) {
     console.log("Welcome to the Pokedex!");
     console.log("Usage:\n");
     for (const cmd of Object.values(state.commands)) {
