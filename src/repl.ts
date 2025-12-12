@@ -1,5 +1,5 @@
 import { getCommands } from "./commands.js";
-import { State } from "./state.js";
+import type { State } from "./state.js";
 
 export function startREPL(state: State) {
   console.log("Starting REPL");
@@ -32,12 +32,12 @@ export function startREPL(state: State) {
 
 
 export function cleanInput(input: string): string[] {
-  let split = input
+  const split = input
     .toLowerCase()
     .trim()
     .split(" ")
-    .filter((word) => word != "");
-  let result = [];
+    .filter((word) => word !== "");
+  const result = [];
   for (const word of split) {
     result.push(word.trim());
   }

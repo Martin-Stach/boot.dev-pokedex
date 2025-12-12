@@ -22,10 +22,10 @@ export type State = {
   prevLocationsURL: string | null;
 };
 
-export function initState() {
+export function initState(cacheInterval: number) {
   const rl = readline;
   const commands = getCommands();
-  const pokeAPI = new PokeAPI();
+  const pokeAPI = new PokeAPI(cacheInterval);
 
   return {
     rl,
