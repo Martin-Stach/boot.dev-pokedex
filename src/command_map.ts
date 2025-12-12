@@ -1,4 +1,4 @@
-import { State } from "./state";
+import type { State } from "./state";
 
 export async function commandMapForward(state: State) {
   console.log("Displaying the map...");

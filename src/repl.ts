@@ -13,6 +13,7 @@ export function startREPL(state: State) {
     }
 
     const commandName = words[0];
+    const args = words.slice(1);
     const commands = getCommands();
     const cmd = commands[commandName];
     
@@ -20,7 +21,7 @@ export function startREPL(state: State) {
       console.log("Unknown command");
     } else {
       try {
-        await cmd.callback(state);
+        await cmd.callback(state, ...args);
       } catch (error) {
         console.log("Error running command:", error);
       }

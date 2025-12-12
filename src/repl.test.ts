@@ -1,5 +1,5 @@
-import { cleanInput } from "./repl";
 import { describe, expect, test } from "vitest";
+import { cleanInput } from "./repl";
 
 describe.each([
   {
@@ -28,6 +28,3 @@ describe.each([
   });
 });
 
-describe.each([
-
-])
