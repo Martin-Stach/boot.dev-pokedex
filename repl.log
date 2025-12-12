@@ -3,15 +3,8 @@
 > npx tsc && node dist/main.js
 
 Starting REPL
-Pokedex > Found Pokemon:
-- tentacool
-- tentacruel
-- magikarp
-- gyarados
-- remoraid
-- octillery
-- wingull
-- pelipper
-- shellos
-- gastrodon
+Pokedex > Throwing a Pokeball at squirtle...
+squirtle escaped!
+Pokedex > Throwing a Pokeball at squirtle...
+squirtle was caught!
 Pokedex > Closing the Pokedex... Goodbye!

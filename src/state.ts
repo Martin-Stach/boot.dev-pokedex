@@ -1,6 +1,6 @@
 import { createInterface, type Interface } from "readline";
 import { getCommands } from "./commands.js";
-import { PokeAPI } from "./pokeapi.js";
+import { PokeAPI, type Pokemon } from "./pokeapi.js";
 
 export type CLICommand = {
   name: string;
@@ -20,6 +20,7 @@ export type State = {
   pokeAPI: PokeAPI;
   nextLocationsURL: string | null;
   prevLocationsURL: string | null;
+  pokedex: Record<string, Pokemon>;
 };
 
 export function initState(cacheInterval: number) {
@@ -33,5 +34,6 @@ export function initState(cacheInterval: number) {
     pokeAPI,
     nextLocationsURL: null,
     prevLocationsURL: null,
+    pokedex: {},
   };
 }
