@@ -1,24 +1,34 @@
-
+import { Cache } from "./pokecache.js";
 
 export class PokeAPI {
-    private static readonly baseURL = 'https://pokeapi.co/api/v2';
-    limit = 20;
+  private static readonly baseURL = "https://pokeapi.co/api/v2";
+  limit = 20;
+  cache = new Cache(1000);
 
-    constructor() {}
+  constructor() {}
 
-    async fetchLocations(pageURL?: string): Promise<ShallowLocations> {
-        const url = pageURL ?? `${PokeAPI.baseURL}/location-area/?limit=${this.limit}`;
-        const result = await fetch(url);
-        const data = await result.json();
-        return data as ShallowLocations;
+  async fetchLocations(pageURL?: string): Promise<ShallowLocations> {
+    const url =
+      pageURL ?? `${PokeAPI.baseURL}/location-area/?limit=${this.limit}`;
+
+    let data: ShallowLocations;
+    if (this.cache.get(url)) {
+      data = this.cache.get(url) as ShallowLocations;
+    } else {
+      const result = await fetch(url);
+      data = await result.json();
+      this.cache.add(url, data);
     }
 
-    async fetchLocation(locationName: string): Promise<Location> {
-        const url = `${PokeAPI.baseURL}/location-area/${locationName}`;
-        const res = await fetch(url);
-        const data = await res.json();
-        return data as Location;
-    }
+    return data as ShallowLocations;
+  }
+
+  async fetchLocation(locationName: string): Promise<Location> {
+    const url = `${PokeAPI.baseURL}/location-area/${locationName}`;
+    const res = await fetch(url);
+    const data = await res.json();
+    return data as Location;
+  }
 }
 
 export type ShallowLocations = {
@@ -32,31 +42,5 @@ export type ShallowLocations = {
 };
 
 export type Location = {
-    name: string;
-}
-// export type Location = {
-//     areas: {
-//         name: string;
-//         url: string;
-//     }[],
-//     game_indices: {
-//         game_index: number;
-//         generation: {
-//             name: string;
-//             url: string;
-//         },
-//     }[],
-//     id: number;
-//     name: string;
-//     names: {
-//         language: {
-//             name: string;
-//             url: string;
-//         },
-//         name: string,
-//     }[],
-//     region: {
-//         name: string;
-//         url: string;
-//     }
-// }
+  name: string;
+};
